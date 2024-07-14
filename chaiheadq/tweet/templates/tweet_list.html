@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1 class="text-center text-3xl text-white mt-4 ">Welcome to tweet page ..</h1>
+<div class=" text-white text-center">
+  <button class="bg-blue-600 mt-4 text-white  text-xl px-6 h-10 hover:bg-blue-700 hover:text-slate-400 mx-36 rounded-md mb-6"><a href="{%url 'tweet_create'%}">Create a tweet</a></button>
+ <div class="flex flex-wrap gap-3 justify-evenly ">
+    {%for tweet in tweets %}
+    <div class="bg-gray-600 h-auto w-80 shadow-lg rounded-md p-2">
+      <img  class=" h-60" src="{{tweet.photo.url}}" alt="">
+      <div>
+        <h5 class="my-2 text-sm">{{tweet.user.username}}</h5>
+        <p class="text-xl">{{tweet.text}}</p>
+      </div>
+    {%if tweet.user == user%}
+      <div class="flex  justify-center gap-6 mt-3">
+        <button class="bg-orange-500 text-white  text-xl  h-10 hover:bg-orange-600     rounded-md  px-4 shadow-md" type="submit"><a href="{%url 'tweet_edit' tweet.id%}">Edit</a></button>
+        <button class="bg-blue-900 text-white  text-xl  h-10 hover:bg-blue-950    rounded-md px-4 shadow-md" type="submit"><a href="{%url 'tweet_delete' tweet.id%}">Delete</a></button>
+      
+      </div>
+     {%endif%}
+
+    
+    </div>
+    {%endfor%}
+
+  
+  </div>
+  
+</div>
+{% endblock %}

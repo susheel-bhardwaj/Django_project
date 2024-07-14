@@ -1,0 +1,43 @@
+
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock  %}
+    </title>
+		{% tailwind_css %}
+
+
+</head>
+<body class="bg-gray-700 mb-6 ">
+  <nav class="bg-gray-700 shadow-2xl h-16   ">
+    <ul class="flex font-semibold p-4">
+      <li><a class="mx-4 text-xl shadow-sm text-slate-200 hover:text-slate-500 " href="{%url 'tweet_list'%}"> TWEETHOME</a></li>
+     
+     
+      {% if user.is_authenticated %}
+     
+     <form action="{%url 'logout'%}" method="post">
+      {% csrf_token %}
+      <button class="bg-blue-600 text-white    h-10  hover:bg-blue-700 px-4 mx-4  text-center hover:text-slate-400  rounded-md" type="submit">Logout</button>
+     </form>
+     {% else %}
+     <li><a class="mx-6  shadow-sm text-slate-300 hover:text-slate-500" href="{%url 'register'%}"> Register</a></li>
+     <li><a class="mx-6  shadow-sm text-slate-300 hover:text-slate-500" href="{%url 'login'%}"> Login</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+        
+           
+          
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
